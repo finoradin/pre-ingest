@@ -8,7 +8,6 @@ timestamp = datetime.datetime.fromtimestamp(epoch).strftime('%H:%M:%S')
 parser = argparse.ArgumentParser(description="Python tool for ingest from shuttle hard drives at MoMA")
 parser.add_argument('-i', '--input', type=str, required=True, help='The full path to the materials on the shuttle drive you wish to transfer.')
 parser.add_argument('-id', '--objectid', type=str, required=True, help='objectid of the work.')
-parser.add_argument('-o', '--output', type=str, default='~/Desktop/', help='Location you wish to store the bagged transfer. Defaults to desktop if not specified')
 parser.add_argument('-n', '--name', type=str, help='Name of the person operating the script. This ends up the Bag metadata')
 parser.add_argument('-t', '--title', type=str, default='untitled_shuttledrive_transfer', help='Name of the transfer. This is optional.')
 args = parser.parse_args()
@@ -52,39 +51,6 @@ def status():
 def bag_that():
 	bagit.make_bag(fullpath, {'Contact-Name': args.name, 'Timestamp':timestamp}, checksum = ['sha1'])
 
-def hash_that():
-	baghashes = []
-	orighashes = []
-
-	# create list of checksums in bag
-	for line in open(fullpath+"/manifest-sha1.txt"):
-		column = line.split("  ")
-		baghashes.append(column[0])
-
-	# if input is a directory
-	if os.path.isdir(args.input):
-		for path, subdirs, files in os.walk(args.input):
-			for name in files:
-				origpath = os.path.join(path, name)
-				f = open(origpath)
-				thishash = sha1_for_file(f)
-				orighashes.append(thishash)
-
-	# if input is an individual file
-	else:
-		f = open(args.input)
-		thishash = sha1_for_file(f)
-		orighashes.append(thishash)
-
-	#compare list of hashes in bag with list of hashes calculated from original source
-	if comp (baghashes, orighashes) == False:
-		print "Something went wrong. There is a mismatch between the bag hashes and hashes of the files on the original storage media."
-		print "Baghashes: "
-		print baghashes
-		print "Hashlib hashes of orig files: "
-		print orighashes
-	else:
-		print "hashes match!"
 
 print "-----------------------------------------------------------"
 print worktitle+" ("+year+") by "+artistname
@@ -100,7 +66,5 @@ if char == "y":
 	bag_that()
 	print '\b\b files bagged!'
 
-	print 'Verifying hashes....  ',
-	hash_that()
 else:
 	print "ok I won't do anything in that case"
