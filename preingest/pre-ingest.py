@@ -26,7 +26,7 @@ print verbatim
 sanitized = verbatim.replace (" ", "_")
 
 dirname = sanitized
-fullpath = os.path.expanduser(os.path.normpath(args.output) + os.sep)+dirname
+fullpath = os.path.expanduser(os.path.normpath(dirname) + os.sep)+dirname
 
 def comp(list1, list2):
 	for val in list1:
@@ -95,10 +95,6 @@ if char == "y":
 	if not os.path.exists(fullpath):
 		os.makedirs(fullpath)
 		print "Made "+fullpath+" directory."
-
-	print "\n==========================\ncopying file(s) with rsync \n=========================="
-	proc = subprocess.Popen(["rsync", "-avP", os.path.expanduser(os.path.normpath(args.input)), fullpath])
-	proc.wait()
 
 	print 'Bagging files....  ',
 	bag_that()
