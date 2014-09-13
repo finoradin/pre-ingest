@@ -23,6 +23,10 @@ Arguments
 
 Output
 ------------------
-Bags are named with the following convention `ArtistLastname_ArtistFirstname---Title_of_artwork---acessionNumber---TMSObjectID`
+Bags are named with the following convention
+`ArtistLastname_ArtistFirstname---Title_of_artwork---acessionNumber---TMSObjectID`
 
-todo: add exception for inability to resolve connection to TMS
+todo:
+1. add exception for inability to resolve connection to TMS
+2. add component interaction (list / select)
+3. document original order of files (METS?)
