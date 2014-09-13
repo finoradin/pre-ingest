@@ -26,7 +26,8 @@ Output
 Bags are named with the following convention
 `ArtistLastname_ArtistFirstname---Title_of_artwork---acessionNumber---TMSObjectID`
 
-todo:
+To-to list
+------------------
   - add exception for inability to resolve connection to TMS
   - add component interaction (list / select)
   - document original order of files (METS?)
