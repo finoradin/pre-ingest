@@ -28,6 +28,25 @@ sanitized = verbatim.replace (" ", "_")
 dirname = sanitized
 fullpath = os.path.expanduser(os.path.normpath(args.output) + os.sep)+dirname
 
+
+# ------ todo for next version
+# artwork is verified
+# if artwork dir does not exist, it is created
+# first, user is asked if the drive itself is a component
+# if yes, componenets are listed, and user is asked to indicate which it is
+# dir is created for drive component
+# drive is indexed, and index is saved to dir
+# drive dir is bagged
+# components are listed
+# component is chosen
+# if componenet dir does not exist it is created
+# if component dir does exist, user is notified, and asked if they want to add to and update the bag
+# input dir / file is asked for
+# file checksumed
+# copy files
+# bag componenet dir
+
+
 def comp(list1, list2):
 	for val in list1:
 		if val in list2:
